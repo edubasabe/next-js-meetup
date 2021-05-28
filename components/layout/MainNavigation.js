@@ -10,10 +10,20 @@ import {
 } from "@chakra-ui/layout";
 import { Link as NextLink } from "next/router";
 import FavoritesContext from "../../store/favorites-context";
+import { Switch } from "@chakra-ui/switch";
+import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+
 export default function MainNavigation() {
   const favoritesCtx = useContext(FavoritesContext);
+  const { toggleColorMode } = useColorMode();
+  const backgroundNavbarColor = useColorModeValue("blue.400", "blue.800");
+
+  const handleChangeColorMode = () => {
+    toggleColorMode();
+  };
+
   return (
-    <Flex bg="blue.800" p="4" as="header">
+    <Flex bg={backgroundNavbarColor} p="4" as="header">
       <Container maxW="container.xl" d="flex">
         <Heading as="h1" fontSize="2xl" color="white">
           Next.js Meetups
@@ -22,7 +32,7 @@ export default function MainNavigation() {
           <UnorderedList d="flex" styleType="none">
             <ListItem>
               <Link
-                to="/"
+                href="/"
                 as={NextLink}
                 color="whiteAlpha.800"
                 fontWeight="bold"
@@ -32,7 +42,7 @@ export default function MainNavigation() {
             </ListItem>
             <ListItem>
               <Link
-                to="/new-meetup"
+                href="/new-meetup"
                 as={NextLink}
                 mx="4"
                 color="whiteAlpha.800"
@@ -47,12 +57,16 @@ export default function MainNavigation() {
                 as={NextLink}
                 color="whiteAlpha.800"
                 fontWeight="bold"
+                mr="4"
               >
                 Favorites
                 <Badge ml="2" colorScheme="blue" borderRadius="md">
                   {favoritesCtx.totalFavorites}
                 </Badge>
               </Link>
+            </ListItem>
+            <ListItem>
+              <Switch onChange={handleChangeColorMode} />
             </ListItem>
           </UnorderedList>
         </Flex>

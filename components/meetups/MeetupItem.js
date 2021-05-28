@@ -1,29 +1,10 @@
-import { useContext } from "react";
 import { Button } from "@chakra-ui/button";
 import { Box, ListItem, Heading, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import Card from "../ui/Card";
-import FavoritesContext from "../../store/favorites-context";
-import { HeartIcon } from "@heroicons/react/outline";
-import Icon from "@chakra-ui/icon";
-export default function MeetupItem(props) {
-  const favoritesContext = useContext(FavoritesContext);
-  const itemIsFavorite = favoritesContext.itemIsFavorite(props.id);
+import Link from "next/link";
 
-  function toggleFavoritesStatusHandler() {
-    if (itemIsFavorite) {
-      favoritesContext.removeFavorite(props.id);
-    } else {
-      favoritesContext.addFavorite({
-        id: props.id,
-        title: props.title,
-        description: props.description,
-        image: props.image,
-        address: props.address,
-      });
-    }
-  }
-
+function MeetupItem(props) {
   return (
     <ListItem>
       <Card m="2" maxW="xs">
@@ -38,15 +19,13 @@ export default function MeetupItem(props) {
           <Text>{props.description}</Text>
         </Box>
         <Box px="4" pb="4">
-          <Button
-            onClick={toggleFavoritesStatusHandler}
-            colorScheme={itemIsFavorite ? "gray" : "blue"}
-          >
-            {itemIsFavorite ? "Remove from favorites" : "Add to Favorites"}
-            <Icon as={HeartIcon} ml="1" />
-          </Button>
+          <Link href={`/${props.id}`}>Show Details</Link>
+          {/* <Button as={Link} colorScheme="blue">
+            Show Details
+          </Button> */}
         </Box>
       </Card>
     </ListItem>
   );
 }
+export default MeetupItem;
