@@ -1,7 +1,7 @@
 import { Container, Heading, Flex, Text } from "@chakra-ui/layout";
 import PageHeading from "../../components/ui/PageHeading";
 
-function MeetupDetail({ image, title, description }) {
+function MeetupDetail({ image, title, description, address }) {
   return (
     <>
       <Flex as="section" direction="column">
@@ -15,7 +15,8 @@ function MeetupDetail({ image, title, description }) {
           <PageHeading>
             <Heading as="h2">{title}</Heading>
           </PageHeading>
-          <Text>{description}</Text>
+          <Text mb="2">{description}</Text>
+          <Text as="address">{address}</Text>
         </Container>
       </Flex>
     </>

@@ -28,15 +28,25 @@ const DUMMY_MEETUPS = [
     description: "This is a third meetup",
   },
 ];
-function HomePage() {
+
+function HomePage({ meetups }) {
   return (
     <Container maxW="container.xl">
       <PageHeading>
         <Heading as="h2">All Meetups</Heading>
       </PageHeading>
-      <MeetupList meetups={DUMMY_MEETUPS} />
+      <MeetupList meetups={meetups} />
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  // Fetch data from an API
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+  };
 }
 
 export default HomePage;

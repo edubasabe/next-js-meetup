@@ -66,7 +66,7 @@ export default function NewMeetupForm(props) {
             />
           </FormControl>
           <Flex justify="flex-end">
-            <Button colorScheme="pink" type="submit">
+            <Button colorScheme="blue" type="submit">
               Add Meetup
             </Button>
           </Flex>
