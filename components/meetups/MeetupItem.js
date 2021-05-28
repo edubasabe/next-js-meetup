@@ -2,27 +2,31 @@ import { Button } from "@chakra-ui/button";
 import { Box, ListItem, Heading, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import Card from "../ui/Card";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
-function MeetupItem(props) {
+function MeetupItem({ id, image, title, address, description }) {
+  const router = useRouter();
+
+  function handleShowDetail() {
+    router.push(`/${id}`);
+  }
   return (
     <ListItem>
       <Card m="2" maxW="xs">
         <Box>
-          <Image src={props.image} alt={props.title} />
+          <Image src={image} alt={title} />
         </Box>
         <Box p="4">
           <Heading as="h3" fontSize="2xl">
-            {props.title}
+            {title}
           </Heading>
-          <Text as="address">{props.address}</Text>
-          <Text>{props.description}</Text>
+          <Text as="address">{address}</Text>
+          <Text>{description}</Text>
         </Box>
         <Box px="4" pb="4">
-          <Link href={`/${props.id}`}>Show Details</Link>
-          {/* <Button as={Link} colorScheme="blue">
+          <Button onClick={handleShowDetail} colorScheme="blue">
             Show Details
-          </Button> */}
+          </Button>
         </Box>
       </Card>
     </ListItem>
